@@ -25,6 +25,9 @@ class CSVParserExTest {
 
         assertStringArray(new String[]{"aaaaa\"1111", "b\"b\"b", "ccccccccccccc"},
                 parseCSV(",", "\"", '\\', "aaaaa\"\"1111,b\"b\"b,\"ccccccccccccc\""));
+
+        assertStringArray(new String[]{"aaaaa\"1111", "b\"b\"b", "cccccc\nccccccc"},
+                parseCSV(",", "\"", '\\', "aaaaa\"\"1111,b\"b\"b,\"cccccc\nccccccc\""));
     }
 
     @Test
@@ -38,6 +41,9 @@ class CSVParserExTest {
 
         assertStringArray(new String[]{"aaaaa#~1111", "b#~b#~b", "ccccccccccccc"},
                 parseCSV("||", "#~", '\\', "aaaaa#~#~1111||b#~b#~b||#~ccccccccccccc#~"));
+
+        assertStringArray(new String[]{"aaaaa#~1111", "b#~b#~b", "cccccc\nccccccc"},
+                parseCSV("||", "#~", '\\', "aaaaa#~#~1111||b#~b#~b||#~cccccc\nccccccc#~"));
     }
 
     private static String[] parseCSV(String separator, String quote, char escape, String str) throws IOException {
